@@ -60,6 +60,15 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/productDetails/:id", async (req, res) => {
+      console.log(req.params.id);
+      const result = await tripCollection.findOne({
+        _id: new ObjectId(req.params.id),
+      });
+      console.log(result);
+      res.send(result);
+    });
+
     app.put("/updateProduct/:id", async (req, res) => {
       console.log(req.params.id);
       const query = { _id: new ObjectId(req.params.id) };
@@ -74,6 +83,7 @@ async function run() {
       res.send(result);
     });
 
+    //delete operation
     app.delete("/delete/:id", async (req, res) => {
       const result = await tripCollection.deleteOne({
         _id: new ObjectId(req.params.id),
