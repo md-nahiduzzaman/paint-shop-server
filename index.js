@@ -82,6 +82,14 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/myProduct/:userEmail", async (req, res) => {
+      console.log(req.params.email);
+      const result = await tripCollection
+        .find({ email: req.params.email })
+        .toArray();
+      res.send(result);
+    });
+
     // app.post("/addProduct", async (req, res) => {
     //   // const newTrip = req.body;
     //   // console.log(newTrip);
