@@ -45,12 +45,6 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/countries", async (req, res) => {
-      const cursor = countriesCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
-    });
-
     app.post("/products", async (req, res) => {
       console.log(req.body);
       const result = await tripCollection.insertOne(req.body);
