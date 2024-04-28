@@ -38,6 +38,7 @@ async function run() {
     // const tripCollection = client.db("tripDB").collection("products");
     const tripCollection = client.db("tripDB").collection("products");
     const countriesCollection = client.db("tripDB").collection("countries");
+    const categoriesCollection = client.db("tripDB").collection("categories");
 
     app.get("/products", async (req, res) => {
       const cursor = tripCollection.find();
@@ -47,6 +48,12 @@ async function run() {
 
     app.get("/countries", async (req, res) => {
       const cursor = countriesCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    app.get("/categories", async (req, res) => {
+      const cursor = categoriesCollection.find();
       const result = await cursor.toArray();
       res.send(result);
     });
