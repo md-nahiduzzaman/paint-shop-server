@@ -37,9 +37,16 @@ async function run() {
 
     // const tripCollection = client.db("tripDB").collection("products");
     const tripCollection = client.db("tripDB").collection("products");
+    const countriesCollection = client.db("tripDB").collection("countries");
 
     app.get("/products", async (req, res) => {
       const cursor = tripCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    app.get("/countries", async (req, res) => {
+      const cursor = countriesCollection.find();
       const result = await cursor.toArray();
       res.send(result);
     });
