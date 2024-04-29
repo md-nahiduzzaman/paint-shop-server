@@ -120,8 +120,9 @@ async function run() {
     app.get("/myProduct/:email", async (req, res) => {
       console.log(req.params.email);
       const result = await tripCollection
-        .find({ email: req.params.email })
+        .find({ userEmail: req.params.email })
         .toArray();
+      console.log(result);
       res.send(result);
     });
 
@@ -155,9 +156,9 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("tripbd server is runnggggging yahya");
+  res.send("server is runnging ");
 });
 
 app.listen(port, () => {
-  console.log(`tripbd server is running on port: ${port}`);
+  console.log(`server is running on port: ${port}`);
 });
