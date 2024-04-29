@@ -117,7 +117,7 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/myProduct/:userEmail", async (req, res) => {
+    app.get("/myProduct/:email", async (req, res) => {
       console.log(req.params.email);
       const result = await tripCollection
         .find({ email: req.params.email })
