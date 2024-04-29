@@ -11,7 +11,11 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://tripbd-react.web.app", "http://localhost:5173"],
+  })
+);
 app.use(express.json());
 
 //tripbd
@@ -89,7 +93,14 @@ async function run() {
       const data = {
         $set: {
           image: req.body.image,
-          tourists_spot_name: req.body.tourists_spot_name,
+          item_name: req.body.item_name,
+          subcategory_Name: req.body.subcategory_Name,
+          short_description: req.body.short_description,
+          price: req.body.price,
+          rating: req.body.rating,
+          customization: req.body.customization,
+          processing_time: req.body.processing_time,
+          stockStatus: req.body.stockStatus,
         },
       };
       const result = await tripCollection.updateOne(query, data);
@@ -110,6 +121,14 @@ async function run() {
       console.log(req.params.email);
       const result = await tripCollection
         .find({ email: req.params.email })
+        .toArray();
+      res.send(result);
+    });
+
+    app.get("/product/:subCategory", async (req, res) => {
+      console.log(req.params.subCategory);
+      const result = await tripCollection
+        .find({ subcategory_Name: req.params.subCategory })
         .toArray();
       res.send(result);
     });
